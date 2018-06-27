@@ -47,7 +47,22 @@ public class JdbcCounterRepository implements CounterRepository {
     jdbc.update("update counter set value = ? where id = ?",value,aCounterName);
     return value;
   }
-  
+
+  @Override
+  @Transactional
+  public long increment(String aCounterName) {
+    try {
+      Long value = jdbc.queryForObject("select coalesce(value, 0) from counter where id = ? for update", Long.class, aCounterName);
+      value = value + 1;
+      jdbc.update("update counter set value = ? where id = ?", value, aCounterName);
+
+
+      return value;
+    } catch (EmptyResultDataAccessException e) {
+      set(aCounterName, 0);
+      return 0;
+    }
+  }
 
   @Override
   public void delete (String aCounterName) {

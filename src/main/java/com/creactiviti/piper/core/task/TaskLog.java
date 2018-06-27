@@ -13,19 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.creactiviti.piper.core.event;
+package com.creactiviti.piper.core.task;
 
-/**
- * 
- * @author Arik Cohen
- * @since Apr 8, 2017
- */
-public interface Events {
+import java.util.Date;
 
-  public static final String TASK_STARTED = "task.started";
-  public static final String TASK_NOTIFICATION = "task.notification";
 
-  public static final String JOB_STATUS = "job.status";
-  
-  
+public interface TaskLog {
+
+  /**
+   * Get the unique id of the task log.
+   *
+   * @return String the id
+   */
+  String getId();
+
+  /**
+   * Get the id of the task execution for which this task
+   * belongs to.
+   *
+   * @return String the id of the job
+   */
+  String getTaskExecutionId();
+
+  /**
+   * Get the time of the log.
+   *
+   * @return Date
+   */
+  Date getTime();
+
+  /**
+   * Get the message of the log.
+   *
+   * @return The message of the log.
+   */
+  String getMessage();
+
 }

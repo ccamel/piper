@@ -19,6 +19,8 @@ create table job (
 CREATE INDEX ON job (create_time);
 CREATE INDEX ON job (status);
 
+drop table if exists task_log;
+
 drop table if exists task_execution;
 
 create table task_execution (
@@ -35,6 +37,18 @@ create table task_execution (
 );
 
 CREATE INDEX ON task_execution (job_id);
+
+create table task_log (
+  id varchar(256) not null primary key,
+  task_execution_id varchar(256) not null,
+  time timestamp not null,
+  message text not null,
+
+  log_number bigint not null,
+
+  foreign key (task_execution_id) references task_execution(id),
+  unique (task_execution_id, log_number)
+);
 
 drop table if exists context;
 

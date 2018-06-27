@@ -15,18 +15,18 @@
  */
 package com.creactiviti.piper.config;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-
 import com.creactiviti.piper.core.context.JdbcContextRepository;
 import com.creactiviti.piper.core.job.JdbcJobRepository;
 import com.creactiviti.piper.core.task.CounterRepository;
 import com.creactiviti.piper.core.task.JdbcCounterRepository;
 import com.creactiviti.piper.core.task.JdbcTaskExecutionRepository;
+import com.creactiviti.piper.core.task.JdbcTaskLogRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 @Configuration
 @ConditionalOnProperty(name="piper.persistence.provider",havingValue="jdbc")
@@ -37,6 +37,15 @@ public class JdbcPersistenceConfiguration {
     JdbcTaskExecutionRepository jdbcJobTaskRepository = new JdbcTaskExecutionRepository();
     jdbcJobTaskRepository.setJdbcOperations(aJdbcTemplate);
     jdbcJobTaskRepository.setObjectMapper(aObjectMapper);
+    return jdbcJobTaskRepository;
+  }
+
+  @Bean
+  JdbcTaskLogRepository jdbcJobTaskLogRepository (NamedParameterJdbcTemplate aJdbcTemplate, ObjectMapper aObjectMapper, CounterRepository aCounterRepository) {
+    JdbcTaskLogRepository jdbcJobTaskRepository = new JdbcTaskLogRepository();
+    jdbcJobTaskRepository.setJdbcOperations(aJdbcTemplate);
+    jdbcJobTaskRepository.setObjectMapper(aObjectMapper);
+    jdbcJobTaskRepository.setCounterRepository(aCounterRepository);
     return jdbcJobTaskRepository;
   }
   

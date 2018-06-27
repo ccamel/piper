@@ -27,7 +27,7 @@ public class DSL {
   public static final String PARENT_ID = "parentId";
   
   public static final String JOB_ID = "jobId";
-  
+
   public static final String LABEL = "label";
   
   public static final String NODE = "node";
@@ -47,7 +47,11 @@ public class DSL {
   public static final String EXECUTION_TIME = "executionTime";
   
   public static final String CREATE_TIME = "createTime";
-  
+
+  public static final String TASK_ID = "taskId";
+
+  public static final String MESSAGE = "message";
+
   public static final String PIPELINE_ID = "pipelineId";
   
   public static final String START_TIME = "startTime";
@@ -99,7 +103,9 @@ public class DSL {
   public static final String OUTPUTS = "outputs";
   
   public static final String VALUE = "value";
-  
+
+  public static final String LOG = "logs";
+
   public static final String[] RESERVED_WORDS = new String[]{
                                                               ID,
                                                               PARENT_ID,

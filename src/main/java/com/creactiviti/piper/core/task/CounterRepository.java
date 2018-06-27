@@ -29,7 +29,14 @@ public interface CounterRepository {
    * @param aValue the value to set the counter to.
    */
   void set (String aCounterName, long aValue);
-  
+
+  /**
+   * Increment the specified counter by 1.
+   * @param aCounterName the name of the counter
+   * @return the new value
+   */
+  long increment (String aCounterName);
+
   /**
    * Decrement the specified counter by 1.
    * @param aCounterName the name of the counter

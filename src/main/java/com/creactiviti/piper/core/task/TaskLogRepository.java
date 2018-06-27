@@ -13,19 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.creactiviti.piper.core.event;
+package com.creactiviti.piper.core.task;
 
-/**
- * 
- * @author Arik Cohen
- * @since Apr 8, 2017
- */
-public interface Events {
+public interface TaskLogRepository {
 
-  public static final String TASK_STARTED = "task.started";
-  public static final String TASK_NOTIFICATION = "task.notification";
-
-  public static final String JOB_STATUS = "job.status";
-  
+  /**
+   * Creates a new persistent representation of the given {@link TaskLog}.
+   *
+   * @param aTaskLog
+   */
+  void create(TaskLog aTaskLog);
   
 }
